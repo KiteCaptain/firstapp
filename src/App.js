@@ -5,15 +5,16 @@ import Footer from './components/Footer'
 import Promo from './components/Promo';
 import Intro1 from './components/Intro1';
 import Intro2 from './components/Intro2';
-import Intro3 from './components/Intro3'
-
+import Intro3 from './components/Intro3';
+import Mode from './components/Mode';
 
 function App() {
 	return (
 		<div className="App">
 			<Heading name="Kite Eugine"/>
+			<Mode />
 			<Nav />
-			<Promo />
+			<Promo initial="0"/>
 			<Intro1 />
 			<Intro2 />
 			<Intro3 />
@@ -22,5 +23,4 @@ function App() {
 		
 	)
 }
-
 export default App;
