@@ -1,4 +1,6 @@
 import './App.css';
+import { useState, useRef } from 'react'
+import {Routes, Route, Link} from 'react-router-dom'
 import Heading from './components/Heading';
 import Nav from './components/Nav';
 import Footer from './components/Footer'
@@ -8,7 +10,8 @@ import Intro2 from './components/Intro2';
 import Intro3 from './components/Intro3';
 import Mode from './components/Mode';
 import Main from './components/Main';
-import { useState, useRef } from 'react'
+import Homepage from './components/Homepage'
+import Aboutme from './components/Aboutme'
 
 function InputComponent() {
 	const [inputText, setText] = useState('Hello')
@@ -38,11 +41,19 @@ function InputFocus() {
 	)
 }
 
-
 function App() {
 	return (
 		<div className="App">
-			<Main msg="Hello world" />
+			<nav>
+				
+				<Link to="/" className="nav-item">Home</Link>
+				<Link to="/about-me" className="nav-item">AboutMe</Link>
+		
+			</nav>
+			<Routes>
+				<Route path='/' element={<Homepage />}/>
+				<Route path='/about-me' element={<Aboutme />}/>
+			</Routes>
 		</div>
 	)
 }
