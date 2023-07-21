@@ -23,7 +23,7 @@ function DayDisplay() {
     return (
         <>
         <h1>{display}</h1>
-        {morning ? <h3>Have youhad your breakfast yet?</h3> : <h3>Hope you're having a nice day :)  </h3>}
+        {morning ? <h3>Have you had breakfast?</h3> : <h3>Hope you're having a nice day :)  </h3>}
         </>
     )
 }
