@@ -17,6 +17,12 @@ import Calculator from './components/Calculator';
 import CounterApp from './components/TimerApp';
 import DayDisplay from './components/DayDisplay';
 import lightbulb from './assets/images/light-bulb.jpg'
+import FeadbackForm from './components/FeedbackForm';
+import { UserProvider, useUser } from './UserContext';
+import { ThemeProvider, useTheme } from './ThemeProvider';
+import Switch from './Switch';
+
+
 
 // function InputComponent() {
 // 	const [inputText, setText] = useState('Hello')
@@ -152,14 +158,12 @@ const data = [
 		price: "$34.00",
 	},
 ]
-
 const topDesserts = data.map(dessert => {
 	return {
 		content: `${dessert.title} - ${dessert.description}`,
 		price: dessert.price,
 	}
 })
-
 const ToDo = props => (
 	<tr>
 		<td><label>{props.id}</label></td>
@@ -169,39 +173,79 @@ const ToDo = props => (
 		<td><label>{props.createdAt}</label></td>
 	</tr>
 )
+// React Context
+const Title = ({children}) => {
+	const {theme} = useTheme()
+	return (
+		<h2
+			style={{
+				color: theme === "light" ? "black" : "white"
+			}}
+			>
+			{children}
+		</h2>
+	)
+}
+const Paragraph = ({children}) => {
+	const {theme} = useTheme()
+	return (
+		<h2
+			style={{
+				color: theme === "light" ? "black" : "white"
+			}}
+			>
+			{children}
+		</h2>
+	)
+}
 
+const Content = () => {
+	return (
+		<div>
+			<Paragraph>
+			We are a pizza loving family. And for years, I searched and searched and
+        searched for the perfect pizza dough recipe. I tried dozens, or more.
+        And while some were good, none of them were that recipe that would
+        make me stop trying all of the others.
+			</Paragraph>
+		</div>
+	)
+}
+
+const Header = () => {
+	return (
+		<header>
+			<Title>Little Lemon 🍕</Title>
+			<Switch />
+		</header>
+	)
+}
+
+const Page = () => {
+	return (
+		<div className="Page">
+			<Title>When it comes to dough</Title>
+			<Content />
+		</div>
+	)
+}
 
 function App() { 
-	const [todos, setTodos] = useState([{
-		id: 'todo1',
-		createdAt: '18:00'
-	}, {
-		id: 'todo2',
-		createdAt: '18:30'
-	}, {
-		id: 'todo3',
-		createdAt: '19:00'
-	}
-	])
-
-	const rerverseOrder = () => {
-		setTodos([...todos].reverse())
-	}
-
-	const listItems = data.map(dessert => {
-		const itemText = `${dessert.title} - ${dessert.price}`
-		return <li>{itemText}</li>
-	})
+	const {theme} = useTheme()
 	return (
-			<div>
-				<button onClick={rerverseOrder}>Reverse</button>
-				<table>
-					<tbody>
-						{todos.map((todo, index) => (<ToDo key={todo.id} id={todo.id} createdAt={todo.createdAt}/>))}
-					</tbody>
-				</table>
+			<div className="App"
+				style={{
+					backgroundColor: theme === "light" ? "white": "black",
+				}}
+			>
+				<Header />
+				<Page />
 			</div>
 		)
 } 
-
-export default App;
+function Root() {
+	<ThemeProvider>
+				<App />
+	</ThemeProvider>
+}
+export default Root;
