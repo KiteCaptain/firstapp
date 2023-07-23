@@ -1,5 +1,5 @@
 import './App.css';
-import { useState, useRef, useReducer } from 'react'
+import { useState, useRef, useReducer, useEffect} from 'react'
 import {Routes, Route, Link} from 'react-router-dom'
 import ReactPlayer from 'react-player/youtube';
 import Heading from './components/Heading';
@@ -21,6 +21,8 @@ import FeadbackForm from './components/FeedbackForm';
 import { UserProvider, useUser } from './UserContext';
 import { ThemeProvider, useTheme } from './ThemeProvider';
 import Switch from './Switch';
+// data fetching
+import RandomUser from './components/RandomUser';
 
 
 
@@ -198,7 +200,6 @@ const Paragraph = ({children}) => {
 		</h2>
 	)
 }
-
 const Content = () => {
 	return (
 		<div>
@@ -211,7 +212,6 @@ const Content = () => {
 		</div>
 	)
 }
-
 const Header = () => {
 	return (
 		<header>
@@ -220,7 +220,6 @@ const Header = () => {
 		</header>
 	)
 }
-
 const Page = () => {
 	return (
 		<div className="Page">
@@ -229,17 +228,78 @@ const Page = () => {
 		</div>
 	)
 }
+// useEffect Hook
+const MenuPage = (props) => {
+	const [data, setData] = useState([])
+	useEffect(() => {
+		document.title = 'Little lemon'
+	}, [])
+	useEffect(() => {
+		fetch(`http://127.0.0.1:8000/little-lemon/menu-items`)
+		.then(response => response.json())
+		.then(json => setData(json))
+	})
+}
+	// Effect with cleanup
+function LittleLemonChat(props) {
+	const [status, setStatus] = useState('offline')
+	useEffect(() => {
+		// LemonChat.subscribeToMessages(props.chatId, () => setStatus('online'))
+		return () => {
+			setStatus('offline')
+			// LemonChat.unsubscribeFromMessages(props.chatId)
+		}
+	}, [])
+}
+
 
 function App() { 
-	const {theme} = useTheme()
+	const [toggle, setToggle] = useState(false)
+
+	const clickHandler = () => {
+		setToggle(!toggle)
+	}
+
+	useEffect(() => {
+		document.title = toggle ? "Wecome to Littlelemon" : "Using the useEffect hook"
+	}, )
+	// DATA FETCHING 
+	const [btcData, setBtcData] = useState({});
+	useEffect(() => {
+		fetch(`https://api.coindesk.com/v1/bpi/currentprice.json`)
+		.then((response) => response.json())
+		.then((jsonData) => setBtcData(jsonData.bpi.USD))
+		.catch((error) => console.log(error))
+	}, [])
+
 	return (
-			<div className="App"
-				style={{
-					backgroundColor: theme === "light" ? "white": "black",
-				}}
-			>
-				<Header />
-				<Page />
+			// <div className="App"
+			// // 	style={{
+			// // 		backgroundColor: theme === "light" ? "white": "black",
+			// // 	}}
+			// // >
+			// // 	<Header />
+			// // 	<Page />
+			// >
+			// </div>
+
+			<div className='App'>
+				<div>
+					<h1>Using the useEffect hook</h1>
+					<button onClick={clickHandler}>
+						Toggle message
+					</button>
+					{toggle && <h2>Welcom to LittleLemonChat</h2>}
+				</div>
+				<RandomUser />
+				<div>
+					<h1>Current BTC/USD data</h1>
+					<p>Code: {btcData.code}</p>
+					<p>Symbol: {btcData.symbol}</p>
+					<p>Rate: {btcData.rate}</p>
+					<p>Description: {btcData.description}</p>
+					<p>Rate Float: {btcData.rate_float}</p>
+				</div>
 			</div>
 		)
 } 
@@ -248,4 +308,4 @@ function Root() {
 				<App />
 	</ThemeProvider>
 }
-export default Root;
+export default App;
