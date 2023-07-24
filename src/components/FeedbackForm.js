@@ -1,6 +1,6 @@
 import {useState} from 'react'
 
-export default function FeadbackForm() {
+export default function FeebackForm() {
     const [score, setScore] = useState("10")
     const [comment, setComment] = useState("")
     const handleSubmit = (e) => {

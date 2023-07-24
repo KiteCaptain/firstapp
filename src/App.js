@@ -17,7 +17,7 @@ import Calculator from './components/Calculator';
 import CounterApp from './components/TimerApp';
 import DayDisplay from './components/DayDisplay';
 import lightbulb from './assets/images/light-bulb.jpg'
-import FeadbackForm from './components/FeedbackForm';
+import FeedbackForm from './components/FeedbackForm';
 import ReducerPractise from './components/ReducerPractise';
 import { UserProvider, useUser } from './UserContext';
 import { ThemeProvider, useTheme } from './ThemeProvider';
@@ -257,65 +257,154 @@ function LittleLemonChat(props) {
 }
 
 
-function App() { 
-	const [toggle, setToggle] = useState(false)
+// function App() { 
+// 	const [toggle, setToggle] = useState(false)
 
-	const clickHandler = () => {
-		setToggle(!toggle)
-	}
+// 	const clickHandler = () => {
+// 		setToggle(!toggle)
+// 	}
 
-	useEffect(() => {
-		document.title = toggle ? "Wecome to Littlelemon" : "Using the useEffect hook"
-	}, )
-	// DATA FETCHING 
-	const [btcData, setBtcData] = useState({});
-	useEffect(() => {
-		fetch(`https://api.coindesk.com/v1/bpi/currentprice.json`)
-		.then((response) => response.json())
-		.then((jsonData) => setBtcData(jsonData.bpi.USD))
-		.catch((error) => console.log(error))
-	}, [])
+// 	useEffect(() => {
+// 		document.title = toggle ? "Wecome to Littlelemon" : "Using the useEffect hook"
+// 	}, )
+// 	// DATA FETCHING 
+// 	const [btcData, setBtcData] = useState({});
+// 	useEffect(() => {
+// 		fetch(`https://api.coindesk.com/v1/bpi/currentprice.json`)
+// 		.then((response) => response.json())
+// 		.then((jsonData) => setBtcData(jsonData.bpi.USD))
+// 		.catch((error) => console.log(error))
+// 	}, [])
 
+// 	return (
+// 			// <div className="App"
+// 			// // 	style={{
+// 			// // 		backgroundColor: theme === "light" ? "white": "black",
+// 			// // 	}}
+// 			// // >
+// 			// // 	<Header />
+// 			// // 	<Page />
+// 			// >
+// 			// </div>
+
+// 			// <div className='App'>
+// 			// 	<div>
+// 			// 		<h1>Using the useEffect hook</h1>
+// 			// 		<button onClick={clickHandler}>
+// 			// 			Toggle message
+// 			// 		</button>
+// 			// 		{toggle && <h2>Welcome to LittleLemonChat</h2>}
+// 			// 	</div>
+// 			// 	<div>
+// 			// 		<h1>Current BTC/USD data</h1>
+// 			// 		<p>Code: {btcData.code}</p>
+// 			// 		<p>Symbol: {btcData.symbol}</p>
+// 			// 		<p>Rate: {btcData.rate}</p>
+// 			// 		<p>Description: {btcData.description}</p>
+// 			// 		<p>Rate Float: {btcData.rate_float}</p>
+// 			// 	</div>
+// 			// </div>
+
+// 			// useReducer Practise 
+// 			<div className='App'>
+// 				<ReducerPractise  />
+// 				<UseRefPractise />
+// 				<CustomHooksPractise />
+// 			</div>
+// 		)
+// } 
+
+// HIGHER ORDER COMPONENTS
+
+// const MousePosition = ({render}) => {
+// 	const [mousePosition, setMousePostion] = useState({
+// 		x: 0, y: 0
+// 	})
+// 	useEffect(() => {
+// 		const handleMousePositionChange = (e) => {
+// 			setMousePostion({
+// 				x: e.clientX,
+// 				y: e.clientY,
+// 			})
+// 		}
+// 		window.addEventListener("mousemove", handleMousePositionChange)
+		
+// 		return () => {
+// 			window.addEventListener("mousemove", handleMousePositionChange)
+// 		}
+// 	}, [])
+
+// 	return render({mousePosition})
+// }
+
+
+// const PanelMouseLogger = ({mousePosition}) => {
+// 	// if (!mousePosition) {
+// 	// 	return null
+// 	// }
+// 	// return (
+// 	// 	<div className="BasicTracker"> 
+// 	// 		<p>Mouse Postion</p>
+// 	// 		<div className='Row'>
+// 	// 			<h3>x: {mousePosition.x}</h3>
+// 	// 			<h3>y: {mousePosition.y}</h3>
+// 	// 		</div>
+// 	// 	</div>
+// 	// )
+// 	// // with render props
+// 	return (
+// 		<div>
+// 			<p>Mouse postion</p>
+// 			<MousePosition render={({mousePosition}) => (
+// 				<div className='Row'>
+// 					<span>X: {mousePosition.x}</span>
+// 					<span>Y: {mousePosition.y}</span>
+// 				</div>
+// 			)}
+// 			/>
+// 		</div>
+// 		)
+		
+
+// }
+// const PointMouseLogger = ({ mousePosition }) => {
+// 	// if (!mousePosition) {
+// 	// 	return null;
+// 	// }
+// 	return (
+// 		<MousePosition 
+// 			render={({ mousePosition}) => (
+// 				<h3>({mousePosition.x}, {mousePosition.y})</h3>
+// 			)}
+		
+// 		/>
+// 	)
+// }
+
+// // const PanelMouseTracker = withMousePosition(PanelMouseLogger)
+// // const PointMouseTracker = withMousePosition(PointMouseLogger)
+
+// function App() {
+// 	return (
+// 		<div className='App'>
+// 			<header className='Header'> Little Lemon Mouse logger</header>
+// 			{/* <PanelMouseTracker />
+// 			<PointMouseTracker /> */}
+// 			<PanelMouseLogger />
+// 			<PointMouseLogger  />
+// 		</div>
+// 	)
+// }
+function App() {
 	return (
-			// <div className="App"
-			// // 	style={{
-			// // 		backgroundColor: theme === "light" ? "white": "black",
-			// // 	}}
-			// // >
-			// // 	<Header />
-			// // 	<Page />
-			// >
-			// </div>
-
-			// <div className='App'>
-			// 	<div>
-			// 		<h1>Using the useEffect hook</h1>
-			// 		<button onClick={clickHandler}>
-			// 			Toggle message
-			// 		</button>
-			// 		{toggle && <h2>Welcome to LittleLemonChat</h2>}
-			// 	</div>
-			// 	<div>
-			// 		<h1>Current BTC/USD data</h1>
-			// 		<p>Code: {btcData.code}</p>
-			// 		<p>Symbol: {btcData.symbol}</p>
-			// 		<p>Rate: {btcData.rate}</p>
-			// 		<p>Description: {btcData.description}</p>
-			// 		<p>Rate Float: {btcData.rate_float}</p>
-			// 	</div>
-			// </div>
-
-			// useReducer Practise 
-			<div className='App'>
-				<ReducerPractise  />
-				<UseRefPractise />
-				<CustomHooksPractise />
-			</div>
-		)
-} 
-function Root() {
-	<ThemeProvider>
-				<App />
-	</ThemeProvider>
+		<div className='App'>
+			<a href="https://littlelemon.com" className="App-link">
+				Little Lemon Restaurant
+			</a>
+			<FeedbackForm />
+		</div>
+	)
 }
+
+
 export default App;
