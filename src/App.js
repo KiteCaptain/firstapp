@@ -18,11 +18,15 @@ import CounterApp from './components/TimerApp';
 import DayDisplay from './components/DayDisplay';
 import lightbulb from './assets/images/light-bulb.jpg'
 import FeadbackForm from './components/FeedbackForm';
+import ReducerPractise from './components/ReducerPractise';
 import { UserProvider, useUser } from './UserContext';
 import { ThemeProvider, useTheme } from './ThemeProvider';
 import Switch from './Switch';
-// data fetching
 import RandomUser from './components/RandomUser';
+import UseRefPractise from './components/UseRefPractice';
+import CustomHooksPractise from './components/CustomHooksPractise';
+import useConsoleLog from './components/useConsoleLog';
+
 
 
 
@@ -283,23 +287,29 @@ function App() {
 			// >
 			// </div>
 
+			// <div className='App'>
+			// 	<div>
+			// 		<h1>Using the useEffect hook</h1>
+			// 		<button onClick={clickHandler}>
+			// 			Toggle message
+			// 		</button>
+			// 		{toggle && <h2>Welcome to LittleLemonChat</h2>}
+			// 	</div>
+			// 	<div>
+			// 		<h1>Current BTC/USD data</h1>
+			// 		<p>Code: {btcData.code}</p>
+			// 		<p>Symbol: {btcData.symbol}</p>
+			// 		<p>Rate: {btcData.rate}</p>
+			// 		<p>Description: {btcData.description}</p>
+			// 		<p>Rate Float: {btcData.rate_float}</p>
+			// 	</div>
+			// </div>
+
+			// useReducer Practise 
 			<div className='App'>
-				<div>
-					<h1>Using the useEffect hook</h1>
-					<button onClick={clickHandler}>
-						Toggle message
-					</button>
-					{toggle && <h2>Welcom to LittleLemonChat</h2>}
-				</div>
-				<RandomUser />
-				<div>
-					<h1>Current BTC/USD data</h1>
-					<p>Code: {btcData.code}</p>
-					<p>Symbol: {btcData.symbol}</p>
-					<p>Rate: {btcData.rate}</p>
-					<p>Description: {btcData.description}</p>
-					<p>Rate Float: {btcData.rate_float}</p>
-				</div>
+				<ReducerPractise  />
+				<UseRefPractise />
+				<CustomHooksPractise />
 			</div>
 		)
 } 
