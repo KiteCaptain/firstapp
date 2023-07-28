@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+.navbar-brand  {
+  width: 200px;
+}
+.landing-pic {
+  height: 300px;
+}
+.footer-image {
+  width: 100px
+}
